@@ -4,14 +4,20 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 
+const authRoutes = require("./routes/auth.js");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+
+//Routes
+app.use("/auth", authRoutes);
 
 /* Mongoose setup */
 const PORT = 3001;
 mongoose
   .connect(process.env.MONGODB_URI, {
+    dbName: "mern-rental-home",
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
